@@ -12,7 +12,8 @@ name <- c("Lissandra", "Lucian", "Kayn", "Kindred", "Kled", "Ivern", "Illaoi", "
           "Shen", "Sona", "Galio", "Gangplank", "Corki", "Akali", "Zilean", "Malphite", "Janna", "Jax", 
           "Alistar", "Evelynn", "FiddleSticks", "Cho'Gath", "Dr. Mundo", "Morgana", "Nasus", "Rammus",
           "Sion", "Mordekaiser", "Teemo", "Tristana", "Tryndamere", "Twisted Fate", "Udyr", "Veigar", 
-          "Taric", "Xin Zhao")
+          "Taric", "Xin Zhao", "Warwick", "Ryze", "Singed", "Sivir", "Soraka", "Amumu", "Annie", "Ashe", 
+          "Garen", "Poppy", "Nunu", "Master Yi", "Kayle")
 
 actual.role <- c("Mid", "ADC", "Jungle", "Jungle", "Top", "Jungle", "Top", "ADC", "ADC", "ADC",
                  "Top", "Support", "Mid", "Mid","Support", "Top", "Mid", "Top", "Jungle", 
@@ -24,7 +25,10 @@ actual.role <- c("Mid", "ADC", "Jungle", "Jungle", "Top", "Jungle", "Top", "ADC"
                  "Mid", "Support", "ADC", "Mid", "Jungle", "Top", "Jungle", "Support", "Mid", "Mid", 
                  "Top", "Mid", "ADC", "Jungle", "Top", "Top", "Top", "ADC", "Mid", "Mid", "Mid", 
                  "Mid", "Mid", "Mid", "Mid", "Support", "Support", "Mid", "Top", "Support", "Mid",
-                 "Top", "ADC", "Mid")
+                 "Top", "ADC", "Mid", "Support", "Top", "Support", "Top", "Support", "Jungle", 
+                 "Jungle", "Top", "Top", "Support", "Top", "Jungle", "Top", "Top", "Top", "ADC", 
+                 "Top", "Mid", "Jungle", "Mid", "Support", "Jungle", "Jungle", "Mid", "Top", "ADC", 
+                 "SUpport", "Jungle", "Mid", "ADC", "Top", "Top", "Jungle", "Jungle", "Top")
 
 supposed.role <- c("Mid", "ADC", "Jungle", "Jungle", "Top", "Jungle", "Top", "ADC", "ADC", "ADC",
                  "Top", "Support", "Mid", "Mid","Support", "Top", "Mid", "Top", "Jungle", 
@@ -36,36 +40,10 @@ supposed.role <- c("Mid", "ADC", "Jungle", "Jungle", "Top", "Jungle", "Top", "AD
                  "Mid", "Mid", "ADC", "Mid", "Jungle", "Top", "Jungle", "Support", "Mid", "Mid",
                  "Top", "Mid", "ADC", "Jungle", "Top", "Top", "Top", "ADC", "Mid", "Mid", "Mid", 
                  "Mid", "Mid", "Mid", "Mid", "Support", "Support", "Mid", "Top", "Support", "Mid",
-                 "Top", "ADC", "Mid")
-
-
-actual.role1 <- c("Top", "Mid", "ADC", "Jungle", "Top", "Top", "Top", "ADC", "Mid", "Mid", "Mid", 
-                  "Mid", "Mid", "Mid", "Mid", "Support", "Support", "Mid", "Top", "Support", "Mid",
-                  "Top", "ADC", "Mid")
-
-#"Shyvana", "Nidalee", "Miss Fortune", "Shaco", "Pantheon", "Olaf", "Urgot", "Twitch", 
-#"Lux", "Katarina", "LeBlanc", "Gragas", "Heimerdinger", "Kassadin", "Karthus", "Karma",
-#"Blitzcrank", "Anivia", "Shen", "Sona", "Galio", "Gangplank", "Corki", "Akali"
-
-temp.champ <- c("Zilean", "Malphite", "Janna", "Jax", "Alistar", "Evelynn", "FiddleSticks", 
-                   "Cho'Gath", "Dr. Mundo", "Morgana", "Nasus", "Rammus", "Sion", "Mordekaiser", 
-                   "Teemo", "Tristana", "Tryndamere", "Twisted Fate", "Udyr", "Veigar", "Taric", 
-                   "Xin Zhao")
-
-temp.supposed <- c("Support", "Top", "Support", "Top", "Top", "Jungle", "Jungle", "Top", "Top",
-                   "Support", "Top", "Jungle", "Top", "ADC", "Mid", "ADC", "Top", "Mid", "Jungle",
-                   "Mid", "Support", "Jungle")
-
-temp.actual <- c("Support", "Top", "Support", "Top", "Support", "Jungle", "Jungle", "Top", "Top",
-                 "Support", "Top", "Jungle", "Top", "Top", "Top", "ADC", "Top", "Mid", "Jungle",
-                 "Mid", "Support", "Jungle")
-
-temp.gender <- c("Male", NA, "Female", "Male", "Male", "Female", "Male", "Male", "Male", "Female",
-                 "Male", NA, "Male", "Male", "Male", "Female", "Male", "Male", "Male", "Male", "Male", 
-                 "Male")
-
-temp.price <- c(1350, 1350, 1350, 1350, 1350, 1350, 1350, 1350, 1350, 1350, 1350, 1350, 1350, 1350, 1350,
-                1350, 1350, 1350, 1350, 1350, 1350, 1350)
+                 "Top", "ADC", "Mid", "Support", "Top", "Support", "Top", "Top", "Jungle", "Jungle",
+                 "Top", "Top", "Support", "Top", "Jungle", "Top", "ADC", "Mid", "ADC", "Top", "Mid", 
+                 "Jungle", "Mid", "Support", "Jungle", "Jungle", "Top", "Top", "ADC", "SUpport", 
+                 "Jungle", "Mid", "ADC", "Top", "Top", "Jungle", "Jungle", "Top")
 
 price <- c(6300, 6300, 6300, 6300, 6300, 6300, 6300, 6300, 6300, 6300, 6300, 6300, 6300, 6300, 
            6300, 6300, 6300, 6300, 6300, 6300, 6300, 6300, 6300, 6300, 6300, 6300, 6300, 6300,
@@ -75,7 +53,9 @@ price <- c(6300, 6300, 6300, 6300, 6300, 6300, 6300, 6300, 6300, 6300, 6300, 630
            4800, 4800, 4800, 4800, 4800, 4800, 4800, 4800, 3150, 3150, 3150, 3150, 3150, 3150, 
            3150, 3150, 3150, 3150, 3150, 3150, 3150, 3150, 3150, 3150, 3150, 3150, 3150, 3150, 
            3150, 3150, 3150, 3150, 1350, 1350, 1350, 1350, 1350, 1350, 1350, 1350, 1350, 1350, 
-           1350, 1350, 1350, 1350, 1350, 1350, 1350, 1350, 1350, 1350, 1350, 1350)
+           1350, 1350, 1350, 1350, 1350, 1350, 1350, 1350, 1350, 1350, 1350, 1350, 450, 450, 
+           450, 450, 450, 450, 450, 450, 450, 450, 450, 450, 450)
+
 gender <- c("Female", "Male", "Male", NA, "Male", "Male", "Female", "Male", "Female", "Female", 
             "Female", "Male", "Male", NA, NA, "Male", "Male", "Male", "Female", "Female", "Male",
             "Female", "Male", "Female", "Male", "Male", "Female", "Male", "Female", "Male", "Male",
@@ -87,6 +67,8 @@ gender <- c("Female", "Male", "Male", NA, "Male", "Male", "Female", "Male", "Fem
             NA, "Male", "Male", "Male", "Male", "Female", "Female", "Female", "Male", "Male", "Male",
             "Male", "Female", NA, "Female", "Male", "Female", "Male", "Male", "Male", "Female", "Male", 
             NA, "Female", "Male", "Male", "Female", "Male", "Male", "Male", "Female", "Male", NA, "Male", 
-            "Male", "Male", "Female", "Male", "Male", "Male", "Male", "Male", "Male")
+            "Male", "Male", "Female", "Male", "Male", "Male", "Male", "Male", "Male", "Male", "Male", 
+            "Male", "Female", "Female", "Male", "Female", "Female", "Male","Female", "Male", "Male", 
+            "Female")
 
-champions.league <- data.frame(name,price, gender, supposed.role, actual.role, stringsAsFactors = FALSE)
+league.data <- data.frame(name,price, gender, supposed.role, actual.role, stringsAsFactors = FALSE)
