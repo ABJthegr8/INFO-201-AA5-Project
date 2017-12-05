@@ -36,7 +36,7 @@ countries.filtered.48.edu.summary.by.country <- group_by(countries.filtered.48.e
 
 countries.filtered.48.edu.morocco <- filter(countries.filtered.48.edu, Country.Name == "Morocco")
 
-countries.filtered.48.edu.employ1 <- filter(countries.filtered.48, Series.Code == "SE.PRM.TENR.FE" | Series.Code == "SE.PRM.TENR.MA"
+countries.filtered.48.edu.employ1.employ2 <- filter(countries.filtered.48, Series.Code == "SE.PRM.TENR.FE" | Series.Code == "SE.PRM.TENR.MA"
                                     | Series.Code == "SE.SEC.CMPT.LO.FE.ZS" | Series.Code == "SE.SEC.CMPT.LO.MA.ZS"
                                     | Series.Code == "SE.PRM.NINT.FE.ZS" | Series.Code == "SE.PRM.NINT.MA.ZS"
                                     | Series.Code == "SE.PRM.PRS5.FE.ZS" | Series.Code == "SE.PRM.PRS5.MA.ZS"
@@ -49,16 +49,58 @@ countries.filtered.48.edu.employ1 <- filter(countries.filtered.48, Series.Code =
                                     | Series.Code == "IC.REG.COST.PC.FE.ZS" | Series.Code == "IC.REG.COST.PC.MA.ZS"
                                     | Series.Code == "IC.REG.PROC.FE" | Series.Code == "IC.REG.PROC.MA"
                                     | Series.Code == "IC.REG.DURS.FE" | Series.Code == "IC.REG.DURS.MA"
+                                    
+                                    | Series.Code == "SL.EMP.WORK.FE.ZS" | Series.Code == "SL.EMP.WORK.MA.ZS"
+                                    | Series.Code == "SL.EMP.SMGT.FE.ZS" | Series.Code == "SL.EMP.SMGT.MA.ZS"
+                                    | Series.Code == "SL.TLF.TOTL.FE.ZS" | Series.Code == "SL.TLF.TOTL.MA.ZS"
+                                    | Series.Code == "SL.UEM.1524.FM.ZS" | Series.Code == "SL.UEM.1524.MA.ZS"
+                                    | Series.Code == "SL.EMP.VULN.FE.ZS" | Series.Code == "SL.EMP.VULN.MA.ZS"
+                                    | Series.Code == "SL.EMP.UNDR.FE.ZS" | Series.Code == "SL.EMP.UNDR.MA.ZS"
+                                    | Series.Code == "SL.UEM.TOTL.FE.ZS" | Series.Code == "SL.UEM.TOTL.MA.ZS"
                                     )
 
-countries.filtered.48.edu.employ1.by.country <- group_by(countries.filtered.48.edu.employ1, Country.Name) %>% 
+countries.filtered.48.edu.employ1.employ2.by.country <- group_by(countries.filtered.48.edu.employ1.employ2, Country.Name) %>% 
   summarise(count=n())
 
-countries.filtered.48.employ1 <- filter(countries.filtered.48,  Series.Code == "SL.EMP.SELF.FE.ZS" | Series.Code == "SL.EMP.SELF.MA.ZS"
+countries.filtered.48.employ1 <- filter(countries.filtered.48,  Series.Code == "SL.EMP.OWAC.FE.ZS" | Series.Code == "SL.EMP.OWAC.MA.ZS"
                                             | Series.Code == "IC.REG.COST.PC.FE.ZS" | Series.Code == "IC.REG.COST.PC.MA.ZS"
                                             | Series.Code == "IC.REG.PROC.FE" | Series.Code == "IC.REG.PROC.MA"
                                             | Series.Code == "IC.REG.DURS.FE" | Series.Code == "IC.REG.DURS.MA"
 )
 
 countries.filtered.48.employ1.by.country <- group_by(countries.filtered.48.employ1, Country.Name) %>% 
+  summarise(count=n())
+
+countries.filtered.48.employ2 <- filter(countries.filtered.48,  Series.Code == "SL.EMP.WORK.FE.ZS" | Series.Code == "SL.EMP.WORK.MA.ZS"
+                                        | Series.Code == "SL.EMP.SMGT.FE.ZS" | Series.Code == "SL.EMP.SMGT.MA.ZS"
+                                        | Series.Code == "SL.TLF.TOTL.FE.ZS" | Series.Code == "SL.TLF.TOTL.MA.ZS"
+                                        | Series.Code == "SL.UEM.1524.FM.ZS" | Series.Code == "SL.UEM.1524.MA.ZS"
+                                        | Series.Code == "SL.EMP.VULN.FE.ZS" | Series.Code == "SL.EMP.VULN.MA.ZS"
+                                        | Series.Code == "SL.EMP.UNDR.FE.ZS" | Series.Code == "SL.EMP.UNDR.MA.ZS"
+                                        | Series.Code == "SL.UEM.TOTL.FE.ZS" | Series.Code == "SL.UEM.TOTL.MA.ZS"
+)
+
+countries.filtered.48.employ2.by.country <- group_by(countries.filtered.48.employ2, Country.Name) %>% 
+  summarise(count=n())
+
+countries.filtered.48.edu.employ.good.data <- filter(countries.filtered.48.edu.employ1.employ2,  
+                                        #  Country.Code == "ARG"
+                                          Country.Code == "MAR"
+                                        | Country.Code == "KOR"
+                                        | Country.Code == "MEX"
+                                        #| Country.Code == "PRY"
+                                        #| Country.Code == "ESP"
+                                        | Country.Code == "ARE"
+                                        #| Country.Code == "ETH"
+                                        | Country.Code == "SWE"
+                                        #| Country.Code == "BTN"
+                                        | Country.Code == "COL"
+                                        | Country.Code == "BWA"
+                                        | Country.Code == "ISR"
+                                        #| Country.Code == "GHA"
+                                        | Country.Code == "MYS"
+                                        | Country.Code == "CAN"
+)
+
+countries.filtered.48.edu.employ.good.by.country <- group_by(countries.filtered.48.edu.employ.good.data, Country.Name) %>% 
   summarise(count=n())
