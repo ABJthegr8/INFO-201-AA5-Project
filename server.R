@@ -8,7 +8,7 @@ my.server <- function(input, output) {
     females <- filter(countries.filtered.48.edu.employ.good.data, Country.Code == input$country, Series.Code == input$series)
     female.mani <- select(females, -Series, -Series.Code, -Country.Name, -Country.Code, -NA_count)
     
-    males <- filter(countries.filtered.48.edu.employ.good.data, Country.Code == "MEX", Series.Code == gsub("FE", "MA", females$Series.Code))
+    males <- filter(countries.filtered.48.edu.employ.good.data, Country.Code == input$country, Series.Code == gsub("FE", "MA", females$Series.Code))
     
     males.mani <- select(males, -Series, -Series.Code, -Country.Name, -Country.Code, -NA_count)
     
