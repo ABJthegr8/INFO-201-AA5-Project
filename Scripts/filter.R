@@ -1,11 +1,7 @@
 library(dplyr)
-library(knitr)
-library("ggplot2")
 library(plotly)
 
-# countries.a.l <- read.csv('Data/250e7195-27cb-4e86-a87c-6856a3fa54e9_Data.csv',stringsAsFactors = FALSE)
-# countries.l.z <- read.csv('Data/eae414b7-55b2-4c9b-b63f-ed07e4a90bc8_Data.csv',stringsAsFactors = FALSE)
-
+# combine data from both sources
 countries.a.l <- read.csv('Data/250e7195-27cb-4e86-a87c-6856a3fa54e9_Data.csv',stringsAsFactors = FALSE)
 countries.l.z <- read.csv('Data/eae414b7-55b2-4c9b-b63f-ed07e4a90bc8_Data.csv',stringsAsFactors = FALSE)
 countries <- rbind(countries.a.l, countries.l.z)
@@ -17,12 +13,14 @@ colnames(countries.filtered.48)[1] <- ("Series")
 
 #unique(countries.filtered.48$Series)
 
+# create data frames to highlight good data
 countries.filtered.48.summary.by.country <- group_by(countries.filtered.48, Country.Name) %>%
   summarise(count=n())
 
 countries.filtered.48.summary.by.series <- group_by(countries.filtered.48, Series) %>% 
   summarise(count=n())
 
+# create data frame containing only necessary data
 countries.filtered.48.edu.employ1.employ2 <- filter(countries.filtered.48, Series.Code == "SE.PRM.TENR.FE" | Series.Code == "SE.PRM.TENR.MA"
                                     | Series.Code == "SE.SEC.CMPT.LO.FE.ZS" | Series.Code == "SE.SEC.CMPT.LO.MA.ZS"
                                     #| Series.Code == "SE.PRM.NINT.FE.ZS" | Series.Code == "SE.PRM.NINT.MA.ZS"
@@ -75,24 +73,8 @@ countries.filtered.48.edu.employ.good.data <- filter(countries.filtered.48.edu.e
 countries.filtered.48.edu.employ.good.by.country <- group_by(countries.filtered.48.edu.employ.good.data, Country.Name) %>% 
   summarise(count=n())
 
+# clean data which represents only ratios
 temp <- filter(countries.filtered.48.edu.employ.good.data,Series.Code == 'SL.UEM.1524.FM.ZS')
 temp[1:10,36:62] <- temp[1:10,36:62]/(temp[1:10,36:62]+100)*100
 temp.2 <- filter(countries.filtered.48.edu.employ.good.data,Series.Code != 'SL.UEM.1524.FM.ZS')
 countries.filtered.48.edu.employ.good.data <- rbind(temp,temp.2)
-
-females <- filter(countries.filtered.48.edu.employ.good.data, Country.Code == "MEX", Series.Code == "SE.PRM.TENR.FE")
-female.mani <- select(females, -Series, -Series.Code, -Country.Name, -Country.Code, -NA_count)
-
-males <- filter(countries.filtered.48.edu.employ.good.data, Country.Code == "MEX", Series.Code == gsub(".FE", ".MA", females$Series.Code))
-
-males.mani <- select(males, -Series, -Series.Code, -Country.Name, -Country.Code, -NA_count)
-
-years <- c(1960:2017)
-
-gender.together <- rbind(years, female.mani, males.mani)
-# colnames(complete) <- years
-working <- data.frame(t(gender.together))
-#  rownames(working) <- years
-# colnames(working) <- c("Years","Female", "Male")
-
-gender.complete <- na.omit(working)
