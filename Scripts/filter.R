@@ -40,7 +40,7 @@ countries.filtered.48.edu.employ1.employ2 <- filter(countries.filtered.48, Serie
                                     | Series.Code == "SL.EMP.WORK.FE.ZS" | Series.Code == "SL.EMP.WORK.MA.ZS"
                                     #| Series.Code == "SL.EMP.SMGT.FE.ZS" | Series.Code == "SL.EMP.SMGT.MA.ZS"
                                     | Series.Code == "SL.TLF.TOTL.FE.ZS" | Series.Code == "SL.TLF.TOTL.MA.ZS"
-                                    | Series.Code == "SL.UEM.1524.FM.ZS" | Series.Code == "SL.UEM.1524.MA.ZS"
+                                    | Series.Code == "SL.UEM.1524.FM.ZS" #| Series.Code == "SL.UEM.1524.MA.ZS"
                                     | Series.Code == "SL.EMP.VULN.FE.ZS" | Series.Code == "SL.EMP.VULN.MA.ZS"
                                     #| Series.Code == "SL.EMP.UNDR.FE.ZS" | Series.Code == "SL.EMP.UNDR.MA.ZS"
                                     | Series.Code == "SL.UEM.TOTL.FE.ZS" | Series.Code == "SL.UEM.TOTL.MA.ZS"
@@ -71,3 +71,8 @@ countries.filtered.48.edu.employ.good.data <- filter(countries.filtered.48.edu.e
 
 countries.filtered.48.edu.employ.good.by.country <- group_by(countries.filtered.48.edu.employ.good.data, Country.Name) %>% 
   summarise(count=n())
+
+temp <- filter(countries.filtered.48.edu.employ.good.data,Series.Code == 'SL.UEM.1524.FM.ZS')
+temp[1:10,36:62] <- temp[1:10,36:62]/(temp[1:10,36:62]+100)*100
+temp.2 <- filter(countries.filtered.48.edu.employ.good.data,Series.Code != 'SL.UEM.1524.FM.ZS')
+countries.filtered.48.edu.employ.good.data <- rbind(temp,temp.2)
