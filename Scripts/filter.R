@@ -9,78 +9,45 @@ countries <- rbind(countries.a.l, countries.l.z)
 
 countries <- mutate(countries, NA_count = rowSums(is.na(countries)))
 
-countries.filtered.10 <- filter(countries, NA_count < 10)
 countries.filtered.48 <- filter(countries, NA_count < 48)
-colnames(countries.filtered.10)[1] <- ("Series")
 colnames(countries.filtered.48)[1] <- ("Series")
 
-unique(countries.filtered.48$Series)
+#unique(countries.filtered.48$Series)
 
-countries.filtered.48.summary.by.country <- group_by(countries.filtered.48, Country.Name) %>% 
+countries.filtered.48.summary.by.country <- group_by(countries.filtered.48, Country.Name) %>%
   summarise(count=n())
 
 countries.filtered.48.summary.by.series <- group_by(countries.filtered.48, Series) %>% 
   summarise(count=n())
 
-countries.filtered.48.edu <- filter(countries.filtered.48, Series.Code == "SE.PRM.TENR.FE" | Series.Code == "SE.PRM.TENR.MA"
-                                  | Series.Code == "SE.SEC.CMPT.LO.FE.ZS" | Series.Code == "SE.SEC.CMPT.LO.MA.ZS"
-                                  | Series.Code == "SE.PRM.NINT.FE.ZS" | Series.Code == "SE.PRM.NINT.MA.ZS"
-                                  | Series.Code == "SE.PRM.PRS5.FE.ZS" | Series.Code == "SE.PRM.PRS5.MA.ZS"
-                                  | Series.Code == "SE.PRM.CMPT.FE.ZS" | Series.Code == "SE.PRM.CMPT.MA.ZS"
-                                  | Series.Code == "SE.SEC.PROG.FE.ZS" | Series.Code == "SE.SEC.PROG.MA.ZS"
-                                  | Series.Code == "SE.PRM.CMPL.FE.ZS" | Series.Code == "SE.PRM.CMPL.MA.ZS"
-                                  | Series.Code == "SE.SCH.LIFE.FE" | Series.Code == "SE.SCH.LIFE.MA")
-
-countries.filtered.48.edu.summary.by.country <- group_by(countries.filtered.48.edu, Country.Name) %>% 
-  summarise(count=n())
-
-countries.filtered.48.edu.morocco <- filter(countries.filtered.48.edu, Country.Name == "Morocco")
-
 countries.filtered.48.edu.employ1.employ2 <- filter(countries.filtered.48, Series.Code == "SE.PRM.TENR.FE" | Series.Code == "SE.PRM.TENR.MA"
                                     | Series.Code == "SE.SEC.CMPT.LO.FE.ZS" | Series.Code == "SE.SEC.CMPT.LO.MA.ZS"
-                                    | Series.Code == "SE.PRM.NINT.FE.ZS" | Series.Code == "SE.PRM.NINT.MA.ZS"
+                                    #| Series.Code == "SE.PRM.NINT.FE.ZS" | Series.Code == "SE.PRM.NINT.MA.ZS"
                                     | Series.Code == "SE.PRM.PRS5.FE.ZS" | Series.Code == "SE.PRM.PRS5.MA.ZS"
                                     | Series.Code == "SE.PRM.CMPT.FE.ZS" | Series.Code == "SE.PRM.CMPT.MA.ZS"
                                     | Series.Code == "SE.SEC.PROG.FE.ZS" | Series.Code == "SE.SEC.PROG.MA.ZS"
-                                    | Series.Code == "SE.PRM.CMPL.FE.ZS" | Series.Code == "SE.PRM.CMPL.MA.ZS"
+                                    #| Series.Code == "SE.PRM.CMPL.FE.ZS" | Series.Code == "SE.PRM.CMPL.MA.ZS"
                                     | Series.Code == "SE.SCH.LIFE.FE" | Series.Code == "SE.SCH.LIFE.MA"
                                     
-                                    | Series.Code == "SL.EMP.SELF.FE.ZS" | Series.Code == "SL.EMP.SELF.MA.ZS"
+                                    #| ((Series.Code == "SL.EMP.SELF.FE.ZS" | Series.Code == "SL.EMP.SELF.MA.ZS")&Country.Code == "CAN")
+                                    # was meant to filter Canada own-account after having series code changed but Canada already had self-employed
+                                    
+                                    | Series.Code == "SL.EMP.OWAC.FE.ZS" | Series.Code == "SL.EMP.OWAC.MA.ZS"
                                     | Series.Code == "IC.REG.COST.PC.FE.ZS" | Series.Code == "IC.REG.COST.PC.MA.ZS"
                                     | Series.Code == "IC.REG.PROC.FE" | Series.Code == "IC.REG.PROC.MA"
                                     | Series.Code == "IC.REG.DURS.FE" | Series.Code == "IC.REG.DURS.MA"
                                     
                                     | Series.Code == "SL.EMP.WORK.FE.ZS" | Series.Code == "SL.EMP.WORK.MA.ZS"
-                                    | Series.Code == "SL.EMP.SMGT.FE.ZS" | Series.Code == "SL.EMP.SMGT.MA.ZS"
+                                    #| Series.Code == "SL.EMP.SMGT.FE.ZS" | Series.Code == "SL.EMP.SMGT.MA.ZS"
                                     | Series.Code == "SL.TLF.TOTL.FE.ZS" | Series.Code == "SL.TLF.TOTL.MA.ZS"
                                     | Series.Code == "SL.UEM.1524.FM.ZS" | Series.Code == "SL.UEM.1524.MA.ZS"
                                     | Series.Code == "SL.EMP.VULN.FE.ZS" | Series.Code == "SL.EMP.VULN.MA.ZS"
-                                    | Series.Code == "SL.EMP.UNDR.FE.ZS" | Series.Code == "SL.EMP.UNDR.MA.ZS"
+                                    #| Series.Code == "SL.EMP.UNDR.FE.ZS" | Series.Code == "SL.EMP.UNDR.MA.ZS"
                                     | Series.Code == "SL.UEM.TOTL.FE.ZS" | Series.Code == "SL.UEM.TOTL.MA.ZS"
+                                    | Series.Code == "SG.GEN.PARL.ZS"
                                     )
 
 countries.filtered.48.edu.employ1.employ2.by.country <- group_by(countries.filtered.48.edu.employ1.employ2, Country.Name) %>% 
-  summarise(count=n())
-
-countries.filtered.48.employ1 <- filter(countries.filtered.48,  Series.Code == "SL.EMP.OWAC.FE.ZS" | Series.Code == "SL.EMP.OWAC.MA.ZS"
-                                            | Series.Code == "IC.REG.COST.PC.FE.ZS" | Series.Code == "IC.REG.COST.PC.MA.ZS"
-                                            | Series.Code == "IC.REG.PROC.FE" | Series.Code == "IC.REG.PROC.MA"
-                                            | Series.Code == "IC.REG.DURS.FE" | Series.Code == "IC.REG.DURS.MA"
-)
-
-countries.filtered.48.employ1.by.country <- group_by(countries.filtered.48.employ1, Country.Name) %>% 
-  summarise(count=n())
-
-countries.filtered.48.employ2 <- filter(countries.filtered.48,  Series.Code == "SL.EMP.WORK.FE.ZS" | Series.Code == "SL.EMP.WORK.MA.ZS"
-                                        | Series.Code == "SL.EMP.SMGT.FE.ZS" | Series.Code == "SL.EMP.SMGT.MA.ZS"
-                                        | Series.Code == "SL.TLF.TOTL.FE.ZS" | Series.Code == "SL.TLF.TOTL.MA.ZS"
-                                        | Series.Code == "SL.UEM.1524.FM.ZS" | Series.Code == "SL.UEM.1524.MA.ZS"
-                                        | Series.Code == "SL.EMP.VULN.FE.ZS" | Series.Code == "SL.EMP.VULN.MA.ZS"
-                                        | Series.Code == "SL.EMP.UNDR.FE.ZS" | Series.Code == "SL.EMP.UNDR.MA.ZS"
-                                        | Series.Code == "SL.UEM.TOTL.FE.ZS" | Series.Code == "SL.UEM.TOTL.MA.ZS"
-)
-
-countries.filtered.48.employ2.by.country <- group_by(countries.filtered.48.employ2, Country.Name) %>% 
   summarise(count=n())
 
 countries.filtered.48.edu.employ.good.data <- filter(countries.filtered.48.edu.employ1.employ2,  
