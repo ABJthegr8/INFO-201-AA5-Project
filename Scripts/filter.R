@@ -79,3 +79,20 @@ temp <- filter(countries.filtered.48.edu.employ.good.data,Series.Code == 'SL.UEM
 temp[1:10,36:62] <- temp[1:10,36:62]/(temp[1:10,36:62]+100)*100
 temp.2 <- filter(countries.filtered.48.edu.employ.good.data,Series.Code != 'SL.UEM.1524.FM.ZS')
 countries.filtered.48.edu.employ.good.data <- rbind(temp,temp.2)
+
+females <- filter(countries.filtered.48.edu.employ.good.data, Country.Code == "MEX", Series.Code == "SE.PRM.TENR.FE")
+female.mani <- select(females, -Series, -Series.Code, -Country.Name, -Country.Code, -NA_count)
+
+males <- filter(countries.filtered.48.edu.employ.good.data, Country.Code == "MEX", Series.Code == gsub(".FE", ".MA", females$Series.Code))
+
+males.mani <- select(males, -Series, -Series.Code, -Country.Name, -Country.Code, -NA_count)
+
+years <- c(1960:2017)
+
+gender.together <- rbind(years, female.mani, males.mani)
+# colnames(complete) <- years
+working <- data.frame(t(gender.together))
+#  rownames(working) <- years
+# colnames(working) <- c("Years","Female", "Male")
+
+gender.complete <- na.omit(working)
